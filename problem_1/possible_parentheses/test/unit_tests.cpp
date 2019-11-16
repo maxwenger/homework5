@@ -7,11 +7,18 @@ void showResult(std::list<std::string> & result) {
     }
 };
 
+TEST(test_recursive, 0) {
+    std::list<std::string> result;
+    possibleParenthesis(0, result);
+
+	ASSERT_EQ(result.empty(), 1);
+}
+
 TEST(test_recursive, 1) {
     std::list<std::string> result;
     possibleParenthesis(1, result);
-
-    // homework: add verification
+	
+    std::list<std::string> answer;
 }
 
 TEST(test_recursive, 2) {

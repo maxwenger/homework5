@@ -4,6 +4,7 @@
 #include "TreeNode.h"
 #include <vector>
 #include "LinkedStack.h"
+#include <stack>
 
 template<class T>
 class BinaryTree :  public Tree<T> {
@@ -45,7 +46,30 @@ public:
     }
 
     virtual ~BinaryTree() {
-        // homework
+		if(root == nullptr) {
+			return;
+		}	
+
+		std::stack<TreeNode<T>*> nodesToDelete; 
+		std::stack<TreeNode<T>*> nodeStack; 
+	    nodeStack.push(root); 
+		  
+	    while (nodeStack.empty() == false) 
+	    { 
+			struct TreeNode<T>* node = nodeStack.top(); 
+			nodesToDelete.push(node);
+		    nodeStack.pop(); 
+		                     
+		    if (node->right) 
+			    nodeStack.push(node->right); 
+		    if (node->left) 
+				 nodeStack.push(node->left); 
+	    } 
+
+		while(!nodesToDelete.empty()) {
+			delete nodesToDelete.top();
+			nodesToDelete.pop();
+		}
     }
 
     T LCA(T node1, T node2) {

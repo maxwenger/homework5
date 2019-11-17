@@ -34,15 +34,60 @@ public:
     }
 
     std::vector<T> traverseInOrder() override {
-        // homework, to be done iteratively
+		std::vector<T> victor;
+
+		if(root == nullptr) {
+			return victor;
+		}
+
+		std::stack<TreeNode<T>*> st; 
+	    TreeNode<T>* curr = root; 
+		  
+	    while (curr != NULL || st.empty() == false) 
+	    { 
+			while (curr !=  NULL) {
+				st.push(curr); 
+			    curr = curr->left; 
+			} 
+								  
+			curr = st.top(); 
+		    st.pop(); 
+												  
+			victor.push_back(curr->val);
+
+			curr = curr->right; 
+																  
+		} 
+
+		return victor;
     }
 
     std::vector<T> traversePreOrder() override {
         // don't bother
+		return std::vector<T>();
     }
 
     std::vector<T> traversePostOrder() override {
-        // homework, to be done iteratively
+		std::vector<T> victor;
+
+		std::stack<TreeNode<T>*> st;
+		st.push(root);
+
+		while (!st.empty())
+		{
+			TreeNode<T>* curr = st.top();
+			st.pop();
+
+			victor.push_back(curr->val);
+
+			if (curr->left)
+				st.push(curr->left);
+
+			if (curr->right)
+				st.push(curr->right);
+		}
+		
+		return victor;	
     }
 
     virtual ~BinaryTree() {
@@ -73,15 +118,16 @@ public:
     }
 
     T LCA(T node1, T node2) {
-        // homework
     }
 
     bool add(const T &) override {
         // not implemented yet
+		return false;
     }
 
     bool remove(const T &) override {
         // not implemented yet
+		return false;
     }
 
     int height() override {

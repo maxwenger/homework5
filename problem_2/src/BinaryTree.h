@@ -129,6 +129,9 @@ public:
 		return nodeExists(curr->left, data) || nodeExists(curr->right, data);
 	}
 
+	// I just cant wrap my head around this one.
+	// I tried looking at a few examples online, but I was only able to get
+	// it to work for some of the cases.
     T LCA(TreeNode<T>* curr, T node1, T node2) {
 		static bool lcaFound = false;
 		static T lcaVal;

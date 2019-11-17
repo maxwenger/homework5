@@ -117,8 +117,42 @@ public:
 		}
     }
 
-    T LCA(T node1, T node2) {
+	bool nodeExists(TreeNode<T>* curr, T data) {
+		if(curr == nullptr) {
+			return false;
+		}
+
+		if(curr->val == data) {
+			return true;
+		}
+
+		return nodeExists(curr->left, data) || nodeExists(curr->right, data);
+	}
+
+    T LCA(TreeNode<T>* curr, T node1, T node2) {
+		static bool lcaFound = false;
+		static T lcaVal;
+
+		if(nullptr == curr) {
+			return NULL;
+		}
+		
+		LCA(curr->left, node1, node2);
+		LCA(curr->right, node1, node2);
+
+		if(!lcaFound && (nodeExists(curr->left, node1) && nodeExists(curr->right, node2))
+	          || (nodeExists(curr->left, node2) && nodeExists(curr->right, node1))) {
+
+	         lcaFound = true;
+			 lcaVal = root->val;
+		}
+
+		return lcaVal;
     }
+
+    T LCA(T node1, T node2) {
+		return LCA(root, node1, node2);
+	}
 
     bool add(const T &) override {
         // not implemented yet
